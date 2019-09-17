@@ -1,0 +1,10 @@
+{
+  "editor.tabSize": 2,
+  "editor.formatOnPaste": false,
+  "prettier.eslintIntegration": true,
+  "[javascript]": {
+        "editor.formatOnSave": true
+  },
+  "editor.detectIndentation": false,
+  "jest.pathToConfig": "jestconfig.json"
+}

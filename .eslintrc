@@ -1,0 +1,36 @@
+{
+    "env": {
+        "es6": true,
+        "browser": true,
+        "jest": true
+    },
+    "extends": [
+        "airbnb",
+        "prettier",
+        "prettier/react",
+        "plugin:jsx-a11y/recommended"
+    ],
+    "plugins": [
+        "jsx-a11y"
+    ],
+    "parser": "babel-eslint",
+    "rules": {
+        "comma-dangle": ["error", "never"],
+        "no-return-assign": [2, "except-parens"],
+        "arrow-parens": [2, "as-needed"],
+        "indent": ["error", 2, { "SwitchCase": 1 }],
+        "no-console": 0,
+        "no-plusplus": 0,
+        "no-use-before-define": ["error", { "functions": false }],
+        "no-multi-assign": 0,
+        "func-names": 0,
+        "object-shorthand": 0,
+        "quotes": ["error", "single"],
+        "class-methods-use-this": 0,
+        "no-unused-expressions": ["error", { "allowTernary": true }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "react/static-property-placement": 0,
+        "react/jsx-props-no-spreading": 0
+    }
+}
