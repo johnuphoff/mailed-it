@@ -24,7 +24,6 @@ export const space = [0, 4, 8, 12, 16, 20, 24, 32, 64, 128];
 export const iconSizes = [16, 20, 24, 28, 32];
 
 export const containerWidth = 640;
-
 export const containerPadding = space[5];
 
 export const layout = {

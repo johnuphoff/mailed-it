@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableRow from './TableRow';
-import Table from './Table';
+import TableRow from './helpers/TableRow';
+import Table from './helpers/Table';
 
 const Row = ({ children }) => (
   <Table width={600}>
