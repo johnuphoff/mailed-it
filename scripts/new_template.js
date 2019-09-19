@@ -1,22 +1,52 @@
 const fs = require('fs');
-const { Spinner } = require('cli-spinner');
 
-const args = JSON.parse(process.env.npm_config_argv).original;
-const templateName = args.length > 1 ? args[1] : null;
-const templateType = 'fluid';
+const validArgs = (function getValidArguments() {
 
-console.log('\n');
+  const args = JSON.parse(process.env.npm_config_argv).original;
+  let templateType;
+  let templateName;
 
-const spinner = new Spinner(`🎁 Creating new template file: './templates/${templateName}.js'`);
-spinner.setSpinnerString('|/-\\');
-spinner.start();
+  args.forEach(function iterateOverArguments(arg) {
+    const cleanArg = arg.replace(' ', '').replace('"', '');
+    const nameRegExp = /^--name=(.*)/;
+    const typeRegExp = /^--type=(.*)/;
 
-if (templateName === null) {
-  console.log('\n| 🧐  You must specify the template name e.g. Marketing, Welcome, ForgotPassword\n');
+    if (nameRegExp.test(cleanArg)) {
+      [,templateName] = cleanArg.match(nameRegExp);
+    }
+
+    if (typeRegExp.test(cleanArg)) {
+      [,templateType] = cleanArg.match(typeRegExp);
+    }
+  });
+
+  return {
+    templateName,
+    templateType
+  }
+
+})();
+
+const { templateName, templateType = 'fluid' } = validArgs;
+
+if (!templateName) {
+  console.log('\n| 🧐  You must specify a template name. e.g. template:create --name=MailedIt\n');
   process.exit(0);
 }
 
-fs.writeFile(`./templates/${templateName}.js`, 'Hello content!', function (err) {
+const validTypes = ['fluid', 'responsive', 'hybrid'];
+const formattedTemplateType = templateType.toLowerCase();
+
+if (!validTypes.includes(formattedTemplateType)) {
+  console.log(`\n| 🧐  Invalid type "${templateType}". Type must be one of ${validTypes.join(', ')}.`);
+  process.exit(0);
+}
+
+const templateFileContents = fs.readFileSync(`./lib/${formattedTemplateType}_template.js`, 'utf8');
+const newTemplate = templateFileContents.replace(new RegExp('TEMPLATE_NAME', 'g'), templateName);
+
+fs.writeFile(`./templates/${templateName}.js`, newTemplate, function (err) {
   if (err) throw err;
-  spinner.stop();
 });
+
+console.log(`🎁 Created new ${formattedTemplateType} template: './templates/${templateName}.js'`);
