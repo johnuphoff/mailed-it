@@ -1,9 +1,10 @@
 import React from 'react';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Container from './components/Container';
 import Row from './components/Row';
 import Column from './components/Column';
-import theme from './theme';
+import theme, { containerWidth } from './theme';
+import { Comment } from './components/helpers';
 
 const GlobalStyles = createGlobalStyle`
   
@@ -34,36 +35,54 @@ const GlobalStyles = createGlobalStyle`
   div[style*="margin: 16px 0;"] { margin: 0 !important; }
 `;
 
+const Wrapper = styled.div`
+  background-color:#F2F2F2; 
+  max-width: 640px; 
+  margin: auto;
+`;
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles suppressMultiMountWarning />
-      <Container>
-        <Row>
-          <Column width={12}>Grid 1</Column>
-        </Row>
-      </Container>
-      <Container>
-        <Row>
-          <Column width={6/12}>Grid 2</Column>
-          <Column width={6/12}>Grid 2</Column>
-        </Row>
-      </Container>
-      <Container>
-        <Row>
-          <Column width={4/12}>Grid 3</Column>
-          <Column width={4/12}>Grid 3</Column>
-          <Column width={4/12}>Grid 3</Column>
-        </Row>
-      </Container>
-      <Container>
-        <Row>
-          <Column width={3/12}>Grid 4</Column>
-          <Column width={3/12}>Grid 4</Column>
-          <Column width={3/12}>Grid 4</Column>
-          <Column width={3/12}>Grid 4</Column>
-        </Row>
-      </Container>
+      <Wrapper>
+        <Comment text={`[if mso]>
+          <table role="presentation" width="${containerWidth}" cellspacing="0" cellpadding="0" border="0" align="center">
+          <tr>
+          <td>
+          <![endif]`} />
+        <GlobalStyles suppressMultiMountWarning />
+        <Container>
+          <Row>
+            <Column width={12}>Grid 1</Column>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Column width={6/12}>Grid 2</Column>
+            <Column width={6/12}>Grid 2</Column>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Column width={4/12}>Grid 3</Column>
+            <Column width={4/12}>Grid 3</Column>
+            <Column width={4/12}>Grid 3</Column>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Column width={3/12}>Grid 4</Column>
+            <Column width={3/12}>Grid 4</Column>
+            <Column width={3/12}>Grid 4</Column>
+            <Column width={3/12}>Grid 4</Column>
+          </Row>
+        </Container>
+        <Comment text="[if mso]>
+          </td>
+          </tr>
+          </table>
+          <![endif]" />
+      </Wrapper>
     </ThemeProvider>
   );
 }

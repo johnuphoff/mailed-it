@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableRow from './helpers/TableRow';
+import { TableRow } from './helpers';
 import Table from './helpers/Table';
 
 const Row = ({ children }) => (

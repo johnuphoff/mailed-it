@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableData from './helpers/TableData';
+import { TableData }  from './helpers';
 import { getPx } from '../utils';
 
 const Column = ({ children, width, ...props }) => (

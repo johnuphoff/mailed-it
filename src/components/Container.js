@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableData from './helpers/TableData';
-import TableRow from './helpers/TableRow';
+import { TableData, TableRow } from './helpers';
 import Table from './helpers/Table';
 
 const Container = ({ children }) => (
