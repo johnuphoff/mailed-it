@@ -1,6 +1,8 @@
 # 💅 Mailed It! 
 ## A Modern Approach to Email Templating
 
+![Alt Text](https://github.com/johnuphoff/mailed-it/raw/master/public/images/so-good.gif)
+
 Creating a new template:
 ```
 yarn template:create --name=Welcome --type=fluid
