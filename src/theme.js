@@ -20,16 +20,14 @@ export const media = Object.keys(sizes).reduce((acc, label) => {
 }, {});
 
 export const space = [0, 4, 8, 12, 16, 20, 24, 32, 64, 128];
-
 export const iconSizes = [16, 20, 24, 28, 32];
-
 export const containerWidth = 640;
 export const containerPadding = space[5];
 
 export const layout = {
   containerWidth,
   containerPadding
-}
+};
 
 // font
 export const font = 'objektiv-mk2, helvetica, Arial, sans-serif';
@@ -40,7 +38,6 @@ export const fontWeights = { regular: 400, semiBold: 500, bold: 700 };
 export const lineHeights = ['16px', '20px', '24px', '28px', '32px', '36px', '40px', '52px'];
 
 // colors
-
 export const blue = '#2D7FF9';
 export const green = '#23C2A7';
 export const orange = '#FCB400';
@@ -49,7 +46,6 @@ export const white = '#FFFFFF';
 export const black = '#333333';
 export const grayBlue = '#95A0A6';
 export const lightBlue = '#F0F7FF';
-
 export const gray = ['#F4F4F4', '#EFEFEF', '#E0E0E0', '#C4C4C4', '#969696', '#646464'];
 
 // text

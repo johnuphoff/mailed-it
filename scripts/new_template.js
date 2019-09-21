@@ -1,52 +1,37 @@
 const fs = require('fs');
+const { writeToFile, validAruments, unlink, defaultExports } = require('./utils');
 
-const validArgs = (function getValidArguments() {
+const { original: args } = JSON.parse(process.env.npm_config_argv);
+const { templateName: name, templateType = 'fluid' } = validAruments(args);
+const type = templateType.toLowerCase();
+const validTypes = ['fluid', 'responsive', 'hybrid'];
 
-  const args = JSON.parse(process.env.npm_config_argv).original;
-  let templateType;
-  let templateName;
-
-  args.forEach(function iterateOverArguments(arg) {
-    const cleanArg = arg.replace(' ', '').replace('"', '');
-    const nameRegExp = /^--name=(.*)/;
-    const typeRegExp = /^--type=(.*)/;
-
-    if (nameRegExp.test(cleanArg)) {
-      [,templateName] = cleanArg.match(nameRegExp);
-    }
-
-    if (typeRegExp.test(cleanArg)) {
-      [,templateType] = cleanArg.match(typeRegExp);
-    }
-  });
-
-  return {
-    templateName,
-    templateType
-  }
-
-})();
-
-const { templateName, templateType = 'fluid' } = validArgs;
-
-if (!templateName) {
+if (!name) {
   console.log('\n| 🧐  You must specify a template name. e.g. template:create --name=MailedIt\n');
   process.exit(0);
 }
 
-const validTypes = ['fluid', 'responsive', 'hybrid'];
-const formattedTemplateType = templateType.toLowerCase();
-
-if (!validTypes.includes(formattedTemplateType)) {
-  console.log(`\n| 🧐  Invalid type "${templateType}". Type must be one of ${validTypes.join(', ')}.`);
+if (!validTypes.includes(type)) {
+  console.log(
+    `\n| 🧐  Invalid type "${templateType}". Type must be one of ${validTypes.join(', ')}.`
+  );
   process.exit(0);
 }
 
-const templateFileContents = fs.readFileSync(`./lib/${formattedTemplateType}_template.js`, 'utf8');
-const newTemplate = templateFileContents.replace(new RegExp('TEMPLATE_NAME', 'g'), templateName);
+const buildPath = './src/templates';
+const template = fs.readFileSync(`./lib/${type}_template.txt`, 'utf8');
+const content = template.replace(new RegExp('TEMPLATE_NAME', 'g'), name);
 
-fs.writeFile(`./templates/${templateName}.js`, newTemplate, function (err) {
-  if (err) throw err;
-});
+// TODO refactor tasks, handle errors
+(async function() {
+  // write template file to build directory
+  await writeToFile(`${buildPath}/${name}.js`, content);
+  // sync delete exports module
+  unlink(`${buildPath}/index.js`);
+  // get a list of all files currently in build directory
+  const exports = await defaultExports(buildPath);
+  // wrtie exports
+  await writeToFile(`${buildPath}/index.js`, exports);
 
-console.log(`🎁 Created new ${formattedTemplateType} template: './templates/${templateName}.js'`);
+  console.log(`🎁 Created new ${type} template: '${name}.js'`);
+})();

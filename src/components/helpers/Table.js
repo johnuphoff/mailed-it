@@ -16,15 +16,14 @@ StyledTable.defaultProps = {
   bgcolor: '#ffffff'
 };
 
-const TBody = ({ condition, children }) => 
-  condition ? (<tbody>{children}</tbody>): children;
+const TBody = ({ condition, children }) => (condition ? <tbody>{children}</tbody> : children);
 
 TBody.propTypes = {
   condition: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired
-}
+};
 
-const Table = ({children, ...props}) => {
+const Table = ({ children, ...props }) => {
   const { NODE_ENV } = process.env;
 
   return (
@@ -32,10 +31,10 @@ const Table = ({children, ...props}) => {
       <TBody condition={NODE_ENV === 'development'}>{children}</TBody>
     </StyledTable>
   );
-}
+};
 
 Table.propTypes = {
   children: PropTypes.node.isRequired
-}
+};
 
 export default Table;

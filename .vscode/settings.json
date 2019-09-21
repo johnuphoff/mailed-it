@@ -1,7 +1,7 @@
 {
   "editor.tabSize": 2,
   "editor.formatOnPaste": false,
-  "prettier.eslintIntegration": true,
+  // "prettier.eslintIntegration": true,
   "[javascript]": {
         "editor.formatOnSave": true
   },
