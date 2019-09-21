@@ -10,8 +10,6 @@ function App() {
   return (
     <Router>
       {Object.keys(components).map(c => {
-        console.log(components[c]);
-        // const component = import(components[c]);
         return <Route key={c} path={`/${c}`} exact component={components[c]} />;
       })}
     </Router>
