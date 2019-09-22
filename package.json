@@ -29,9 +29,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "template:delete": "node ./scripts/template",
-    "template:create": "node ./scripts/template",
-    "template:build": "npx babel-node ./scripts/template"
+    "template:delete": "npx babel-node ./scripts/template",
+    "template:create": "npx babel-node ./scripts/template",
+    "build": "npx babel-node ./scripts/template"
   },
   "browserslist": {
     "production": [

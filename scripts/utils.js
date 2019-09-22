@@ -1,5 +1,5 @@
-const fs = require('fs-extra');
-const { promisify } = require('util');
+import fs from 'fs-extra';
+import { promisify } from 'util';
 
 const readFilesAsync = promisify(fs.readdir);
 const writeFileAsync = promisify(fs.outputFile);
@@ -101,4 +101,4 @@ const defaultExports = async path => {
   return `${imported}\n${exported}`;
 };
 
-module.exports = { getFiles, writeToFile, validAruments, defaultExports, unlink };
+export { getFiles, writeToFile, validAruments, defaultExports, unlink };

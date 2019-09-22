@@ -1,10 +1,8 @@
 import { ServerStyleSheet } from 'styled-components';
-
-const fs = require('fs-extra');
-const React = require('react');
-const { renderToStaticMarkup } = require('react-dom/server');
-
-const { getFiles, writeToFile, validAruments, defaultExports, unlink } = require('./utils');
+import fs from 'fs-extra';
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { getFiles, writeToFile, validAruments, defaultExports, unlink } from './utils';
 
 const { original: args } = JSON.parse(process.env.npm_config_argv);
 const { command, templateName: name, templateType = 'fluid' } = validAruments(args);
