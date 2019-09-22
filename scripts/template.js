@@ -1,5 +1,10 @@
+import { ServerStyleSheet } from 'styled-components';
+
 const fs = require('fs-extra');
-const { writeToFile, validAruments, defaultExports, unlink } = require('./utils');
+const React = require('react');
+const { renderToStaticMarkup } = require('react-dom/server');
+
+const { getFiles, writeToFile, validAruments, defaultExports, unlink } = require('./utils');
 
 const { original: args } = JSON.parse(process.env.npm_config_argv);
 const { command, templateName: name, templateType = 'fluid' } = validAruments(args);
@@ -47,7 +52,26 @@ const deleteTemplate = async () => {
   console.log(`🎁 Deleted template: '${name}.js'`);
 };
 
-function buildTemplates() {}
+const buildTemplates = async () => {
+  const files = await getFiles(buildPath);
+
+  files.forEach(async file => {
+    if (file !== 'index.js') {
+      // eslint-disable-next-line global-require
+      const { default: Component } = require('../src/templates/Welcome.js');
+
+      const sheet = new ServerStyleSheet();
+      const innerHTML = renderToStaticMarkup(sheet.collectStyles(<Component />));
+      const styleTags = sheet.getStyleTags();
+      const outerHTML = fs.readFileSync('./public/index.html', 'utf8');
+      const combinedHTML = outerHTML
+        .replace('<center id="root">', `<center>${innerHTML}`)
+        .replace('</head>', `${styleTags}</head>`);
+
+      await writeToFile(`./build/${file.replace('.js', '').toLowerCase()}.html`, combinedHTML);
+    }
+  });
+};
 
 switch (command) {
   case 'create':
@@ -60,5 +84,5 @@ switch (command) {
     buildTemplates();
     break;
   default:
-    console.log(`\n| 🧐 Unknown command ${command} - must be one of create, delete \n`);
+    break;
 }

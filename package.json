@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
     "@styled-system/theme-get": "^5.1.2",
     "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^6.4.0",
@@ -27,7 +31,7 @@
     "start": "react-scripts start",
     "template:delete": "node ./scripts/template",
     "template:create": "node ./scripts/template",
-    "template:build": "node ./scripts/template"
+    "template:build": "npx babel-node ./scripts/template"
   },
   "browserslist": {
     "production": [
