@@ -2,6 +2,7 @@ import { ServerStyleSheet } from 'styled-components';
 import fs from 'fs-extra';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import juice from 'juice';
 import { getFiles, writeToFile, validAruments, defaultExports, unlink } from './utils';
 
 const { original: args } = JSON.parse(process.env.npm_config_argv);
@@ -65,8 +66,9 @@ const buildTemplates = async () => {
       const combinedHTML = outerHTML
         .replace('<center id="root">', `<center>${innerHTML}`)
         .replace('</head>', `${styleTags}</head>`);
+      const inlinedHTML = juice(combinedHTML);
 
-      await writeToFile(`./build/${file.replace('.js', '').toLowerCase()}.html`, combinedHTML);
+      await writeToFile(`./build/${file.replace('.js', '').toLowerCase()}.html`, inlinedHTML);
     }
   });
 };
