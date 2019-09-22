@@ -7,9 +7,10 @@ Creating a new template:
 ```
 yarn template:create --name=Welcome --type=fluid
 ```
-This command will create a stub for the welcome template in `./src/templates/Welcome.js`.  We recommend React casing templates to follow react component naming conventions.  This is the template you use to build your email. The project comes with one pre-generated template named "Welcome.js".  
+This command will create a stub for the welcome template in `./src/templates/Welcome.js`.  
+This is the template you use to build your email.
 
-We recommend using the cli to generate and remove templates. If you want to generate your own template, create a new javascript file in `./src/templates`, then update the `./src/templates/index.js` exports file with your new template name in the following format:
+We recommend using the cli to generate and remove templates. If you want to generate your own template, create a new javascript file in `./src/templates`, then update the `./src/templates/index.js` exports file with your new template name using the following format:
 
 ```
 import Welcome from './Welcome';
@@ -24,19 +25,24 @@ To develop:
 ```
 yarn start
 ```
-Note that when developing in the browser, we add `<tbody>` tags to remove react warnings.  
+When developing in the browser, we add `<tbody>` tags to remove react warnings.  
 These will not appear in the production build (you don't want them).
 
-*** Under Construction ***
 To build production templates:
 ```
-yarn build
+yarn template:build
 ```
 
 Production templates will appear in `./build` and will follow the naming convention of the javscript template file.
-In the example above, `./templates/Homs.js` will be bundled to `./dist/home.html`.
+In the example above, `./templates/Welcome.js` is output to `./build/welcome.html`.
 
-
+## Help Wanted / TODO
+- Add juice config file to support different inlining behaviors
+- Improve command line interface
+- Write tests
+- Add Hybrid and Responsive layouts
+- Add examples for each layout
+- Improve documentation
 
 
 
