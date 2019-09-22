@@ -25,8 +25,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "template:create": "node ./scripts/new_template",
-    "build": "node ./scripts/new_template"
+    "template:delete": "node ./scripts/template",
+    "template:create": "node ./scripts/template",
+    "template:build": "node ./scripts/template"
   },
   "browserslist": {
     "production": [
