@@ -8,11 +8,8 @@ import { getFiles, writeToFile, validAruments, defaultExports, unlink } from './
 const { original: args } = JSON.parse(process.env.npm_config_argv);
 const { command, templateName: name, templateType = 'fluid' } = validAruments(args);
 const type = templateType.toLowerCase();
-const validTypes = ['fluid', 'responsive', 'hybrid'];
-
+const validTypes = fs.readdirSync('./lib');
 const buildPath = './src/templates';
-const template = fs.readFileSync(`./lib/${type}_template.txt`, 'utf8');
-const content = template.replace(new RegExp('TEMPLATE_NAME', 'g'), name);
 
 function validateName() {
   if (!name) {
@@ -33,6 +30,9 @@ function validateType() {
 const createTemplate = async () => {
   validateName();
   validateType();
+
+  const template = fs.readFileSync(`./lib/${type}`, 'utf8');
+  const content = template.replace(new RegExp('TEMPLATE_NAME', 'g'), name);
 
   await writeToFile(`${buildPath}/${name}.js`, content);
   const exports = await defaultExports(buildPath);
