@@ -35,12 +35,9 @@ const validAruments = args => {
   let templateName;
 
   if (args.length === 0) {
-    if (process.env.NODE_ENV !== 'test') {
-      console.log(
-        'Unknown command - must be one of template:create, template:delete. e.g. template:create'
-      );
-    }
-    process.exit(0);
+    console.log(
+      'Unknown command - must be one of template:create, template:delete. e.g. template:create'
+    );
     return {};
   }
 
@@ -49,12 +46,9 @@ const validAruments = args => {
   const [, command] = args[0].split(':').map(el => el.toLowerCase());
 
   if (!command) {
-    if (process.env.NODE_ENV !== 'test') {
-      console.log(
-        'Unknown command - must be one of template:create, template:delete. e.g. template:create'
-      );
-    }
-    process.exit(0);
+    console.log(
+      'Unknown command - must be one of template:create, template:delete. e.g. template:create'
+    );
     return {};
   }
   args.forEach(function iterateOverArguments(arg) {
