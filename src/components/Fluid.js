@@ -1,8 +1,8 @@
 import React from 'react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import PropTypes from 'prop-types';
-import { Comment, Wrapper } from './helpers';
-import theme, { containerWidth } from '../theme';
+import { Wrapper } from './helpers';
+import theme from '../theme';
 
 const GlobalStyles = createGlobalStyle`
   
@@ -35,24 +35,8 @@ const GlobalStyles = createGlobalStyle`
 
 const Fluid = ({ children }) => (
   <ThemeProvider theme={theme}>
-    <Wrapper>
-      <Comment
-        text={`[if mso]>
-        <table role="presentation" width="${containerWidth}" cellspacing="0" cellpadding="0" border="0" align="center">
-        <tr>
-        <td>
-        <![endif]`}
-      />
-      <GlobalStyles suppressMultiMountWarning />
-      {children}
-      <Comment
-        text="[if mso]>
-        </td>
-        </tr>
-        </table>
-        <![endif]"
-      />
-    </Wrapper>
+    <GlobalStyles suppressMultiMountWarning />
+    <Wrapper>{children}</Wrapper>
   </ThemeProvider>
 );
 

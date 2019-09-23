@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { layout } from './theme';
+import { containerWidth, containerPadding } from './theme';
 
-const getPx = width => width * layout.containerWidth - layout.containerPadding;
+const getPx = width => width * containerWidth - containerPadding;
 
 export { getPx };

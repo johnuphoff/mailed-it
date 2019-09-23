@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { containerWidth } from '../../theme';
 
 const StyledTable = styled.table.attrs({ foo: 'bar' })`
   max-width: ${({ width }) => `${width}px`};
@@ -8,7 +9,6 @@ const StyledTable = styled.table.attrs({ foo: 'bar' })`
 `;
 
 StyledTable.defaultProps = {
-  width: 640,
   cellSpacing: 0,
   cellPadding: 0,
   border: 0,
@@ -27,7 +27,7 @@ const Table = ({ children, ...props }) => {
   const { NODE_ENV } = process.env;
 
   return (
-    <StyledTable {...props} foo="bar">
+    <StyledTable width={containerWidth} {...props} foo="bar">
       <TBody condition={NODE_ENV === 'development'}>{children}</TBody>
     </StyledTable>
   );

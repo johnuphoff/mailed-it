@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TableData } from './helpers';
 import { getPx } from '../utils';
+import { containerWidth, containerPadding } from '../theme';
 
 const Column = ({ children, width, ...props }) => (
   <TableData align="center" valign="top" width={getPx(width)} {...props}>
@@ -11,7 +12,7 @@ const Column = ({ children, width, ...props }) => (
 
 Column.defaultProps = {
   children: null,
-  width: 600
+  width: containerWidth - containerPadding
 };
 
 Column.propTypes = {

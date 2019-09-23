@@ -83,6 +83,7 @@ export const shadows = [
 export const radii = [0, 1, 2, 3, 4, 5];
 
 const theme = {
+  layout,
   breakpoints,
   colors,
   font,
