@@ -18,6 +18,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "eslint-plugin-styled-components": "^0.0.0",
     "fs-extra": "^8.1.0",
+    "jest": "^24.9.0",
     "juice": "^5.2.0",
     "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
@@ -32,7 +33,8 @@
     "start": "react-scripts start",
     "template:delete": "npx babel-node ./scripts/template",
     "template:create": "npx babel-node ./scripts/template",
-    "template:build": "npx babel-node ./scripts/template"
+    "template:build": "npx babel-node ./scripts/template",
+    "test": "jest"
   },
   "browserslist": {
     "production": [

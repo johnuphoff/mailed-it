@@ -38,13 +38,21 @@ const validAruments = args => {
     console.log(
       'Unknown command - must be one of template:create, template:delete. e.g. template:create'
     );
-    process.exit(0);
+    return {};
   }
 
+  // NOTE: the token 'template' in 'template:create' is optional in this implementation.
+  // ':create', 'foo:create', and 'template:create' all work the same here
   const [, command] = args[0].split(':').map(el => el.toLowerCase());
 
+  if (!command) {
+    console.log(
+      'Unknown command - must be one of template:create, template:delete. e.g. template:create'
+    );
+    return {};
+  }
   args.forEach(function iterateOverArguments(arg) {
-    const cleanArg = arg.replace(' ', '').replace('"', '');
+    const cleanArg = arg.replace(/ +/g, '').replace(/"/g, '');
     const nameRegExp = /^--name=(.*)/;
     const typeRegExp = /^--type=(.*)/;
 
@@ -57,11 +65,7 @@ const validAruments = args => {
     }
   });
 
-  return {
-    command,
-    templateName,
-    templateType
-  };
+  return { command, templateName, templateType };
 };
 
 /**
