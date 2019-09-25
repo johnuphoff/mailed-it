@@ -43,7 +43,6 @@ In the example above, `./templates/Welcome.js` is output to `./build/welcome.htm
 - Add Hybrid and Responsive layouts
 - Add examples for each layout
 - Improve documentation
-- [renderToStaticMarkup is striping out comments that are used to conditionally render additional markup for Microsoft Outlook.](https://github.com/johnuphoff/mailed-it/issues/3)
 
 
 ## Prior Art
